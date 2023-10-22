@@ -73,7 +73,7 @@ while True:
 				for track in playlist_tracks:
 					try:
 						track_name = track['track']['name']
-						artists = ', '.join([artist['name'] for artist in track['track']['artists']])
+						artists = ', '.join([artist['name'] for artist in track['track']['artists'][:2]])
 						album_name = track['track']['album']['name']
 						duration_ms = track['track']['duration_ms']
 
@@ -151,12 +151,12 @@ def download_song(youtube_link, song_name, album_name):
 		song_name = re.sub(r'[^\x00-\x7F]+', '', song_name)
 		album_name = re.sub(r'[^\x00-\x7F]+', '', album_name)
 
-		file_path = os.path.join("downloaded-songs", f"{album_name} - {song_name}.mp4")
+		file_path = os.path.join("downloaded-songs", f"{song_name}.mp4")
 
 		if os.path.exists(file_path):
 			print(f"Skipping download for {yt.title}. File already exists.")
 		else:
-			audio_file = audio_stream.download(output_path="./downloaded-songs", filename=f"{album_name} - {song_name}.mp4")
+			audio_file = audio_stream.download(output_path="./downloaded-songs", filename=f"{song_name}.mp4")
 			print(f"Downloaded: {yt.title}")
 	except Exception as e:
 		print(f"Error downloading {youtube_link}: {str(e)}")
