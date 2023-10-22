@@ -2,4 +2,5 @@
 .env
 .google-cookie
 songs.json
+playlists.json
 downloaded-songs
